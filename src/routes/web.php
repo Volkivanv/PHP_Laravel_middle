@@ -1,5 +1,7 @@
 <?php
 
+use App\Events\NewsCreated;
+use App\Models\News;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
+    NewsCreated::dispatch(News::first());
     return view('welcome');
 });
 
-Route::get('/logs', function(){
+Route::get('/logs', function () {
     return view('logs');
+});
+
+Route::get('/news-update-test', function () {
+    News::withoutEvents(function () {
+        News::first()->update(['title' => 'TestNew']);
+    });
+    return 'updated';
 });
