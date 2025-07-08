@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Events\NewsCreated;
+use App\Events\NewsHidden;
+use App\Listeners\NewsHiddenListener;
 use App\Listeners\SendNewsCreatedNotification;
 use App\Listeners\SendNewsToRemoteServer;
 use App\Models\News;
@@ -26,6 +28,9 @@ class EventServiceProvider extends ServiceProvider
         NewsCreated::class => [
             SendNewsCreatedNotification::class,
             SendNewsToRemoteServer::class
+        ],
+        NewsHidden::class => [
+            NewsHiddenListener::class
         ]
     ];
 

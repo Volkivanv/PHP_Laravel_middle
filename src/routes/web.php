@@ -30,3 +30,20 @@ Route::get('/news-update-test', function () {
     });
     return 'updated';
 });
+
+Route::get('news/create-test', function () {
+    $news = new News();
+    $news->title = 'Test news title2';
+    $news->body = 'Test news body2';
+   // $news->slug = 'wqeqwe';
+    $news->save();
+    return $news;
+});
+
+Route::get('news/{id}/hide', function ($id) {
+    $news = News::findOrFail($id);
+    $news->hidden = true;
+    $news->save();
+    // Вызовите событие NewsHidden.
+    return 'News hidden';
+});
