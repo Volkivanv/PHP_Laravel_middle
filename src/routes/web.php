@@ -1,8 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
+use App\Mail\BookingCompletedMailing;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Telegram\Bot\Laravel\Facades\Telegram;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +43,21 @@ Route::middleware('log-request')->group(function (){
 
 Route::get('users', [UsersController::class, 'index']);
 Route::get('users/{user}', [UsersController::class, 'show']);
+
+Route::get('book', function () {
+    $email = 'volkvania@yandex.ru';
+    Mail::to($email)->send(new BookingCompletedMailing());
+    return response()->json(['status' => 'succes']);
+});
+
+Route::get('test-telegram', function () {
+    Telegram::sendMessage([
+        'chat_id' => env('TELEGRAM_CHANNEL_ID'),
+        'parse_mode' => 'html',
+        'text'=> 'Произошло тестовое событие'
+    ]);
+    return response()->json(['status' => 'succes']);
+});
+
+Route::get('redirect', [AuthController::class, 'redirectToProvider']);
+Route::get('callback', [AuthController::class, 'handleProviderCallback']);
