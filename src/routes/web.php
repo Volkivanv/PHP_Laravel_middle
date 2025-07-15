@@ -61,3 +61,12 @@ Route::get('test-telegram', function () {
 
 Route::get('redirect', [AuthController::class, 'redirectToProvider']);
 Route::get('callback', [AuthController::class, 'handleProviderCallback']);
+
+
+Route::get('/xdebug', function () {
+
+    $x=5;
+
+    echo xdebug_info();
+
+});
