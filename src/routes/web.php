@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HotelController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UsersController;
 use App\Mail\BookingCompletedMailing;
@@ -63,10 +64,14 @@ Route::get('redirect', [AuthController::class, 'redirectToProvider']);
 Route::get('callback', [AuthController::class, 'handleProviderCallback']);
 
 
-Route::get('/xdebug', function () {
+// Route::get('/xdebug', function () {
 
-    $x=5;
+//     $x=5;
 
-    echo xdebug_info();
+//     echo xdebug_info();
 
-});
+// });
+
+
+
+//Route::get('/hotels',[HotelController::class, 'index']);

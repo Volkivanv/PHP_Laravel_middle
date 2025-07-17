@@ -11,8 +11,8 @@ services:
     depends_on:
       - mysql
       - php
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 
   php:
     build:
@@ -20,8 +20,8 @@ services:
       dockerfile: php.Dockerfile
     volumes:
       - ./src:/var/www/laravel
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
     extra_hosts:
       - "host.docker.internal:host-gateway"
     environment:
@@ -38,8 +38,8 @@ services:
       - env/mysql.env
     volumes:
       - db_data:/var/lib/mysql
-    networks:
-      - app-network
+    # networks:
+    #   - app-network
 
   composer:
     build:
@@ -58,8 +58,8 @@ services:
 volumes:
   db_data:
 
-#Docker Networks
-networks:
-  app-network:
-    driver: bridge
+# #Docker Networks
+# networks:
+#   app-network:
+#     driver: bridge
 
